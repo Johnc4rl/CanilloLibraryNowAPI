@@ -1,15 +1,15 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
-ENV ASPNETCORE_URLS=htpps://+:8080
+ENV ASPNETCORE_URLS=http://+:8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY .  .
-RUN dotnet restore
-RUN dotnetpublish -c Release -o /app/out
+COPY . .
+RUN dotnet restore "CanilloLibraryNowAPI/CanilloLibraryNowAPI.csproj"
+RUN dotnet publish "CanilloLibraryNowAPI/CanilloLibraryNowAPI.csproj" -c Release -o /app/out
 
-FROM base As final
+FROM base AS final
 WORKDIR /app
-COPY --from=build/app/out .
-ENTRYPOINT ["dotnet", "CanilloLibraryNowAPI.dll"]S
+COPY --from=build /app/out .
+ENTRYPOINT ["dotnet", "CanilloLibraryNowAPI.dll"]
