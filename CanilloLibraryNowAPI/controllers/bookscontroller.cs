@@ -1,5 +1,8 @@
 ﻿using CanilloLibraryNowAPI.models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace CanilloLibraryNowAPI.Controllers
 {
@@ -71,7 +74,7 @@ namespace CanilloLibraryNowAPI.Controllers
 
             books.Remove(book);
 
-            return Ok(new { status = "success", data = (object?)null, message = "Book deleted" });
+            return Ok(new { status = "success", data = (object?)null, message = "Book retrieved" });
         }
     }
 }
